@@ -45,8 +45,8 @@ class Indicator():
 
     def create_menu(self):
         menu = Gtk.Menu()
-        item_1 = Gtk.MenuItem('Menu item')
-        # item_1.connect('activate', self.stop)
+        item_1 = Gtk.MenuItem('Toggle')
+        item_1.connect('activate', self.playPause)
         menu.append(item_1)
         menu_sep = Gtk.SeparatorMenuItem()
         menu.append(menu_sep)
@@ -55,6 +55,10 @@ class Indicator():
         menu.append(item_quit)
         menu.show_all()
         return menu
+
+    def playPause(self, something):
+        command = "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"
+        os.system(command)
 
     def show_seconds(self):
         global trackId
