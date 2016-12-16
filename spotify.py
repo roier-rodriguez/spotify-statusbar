@@ -48,6 +48,12 @@ class Indicator():
         item_1 = Gtk.MenuItem('Toggle')
         item_1.connect('activate', self.playPause)
         menu.append(item_1)
+        item_2 = Gtk.MenuItem('Prev')
+        item_2.connect('activate', self.prev)
+        menu.append(item_2)
+        item_3 = Gtk.MenuItem('Next')
+        item_3.connect('activate', self.next)
+        menu.append(item_3)
         menu_sep = Gtk.SeparatorMenuItem()
         menu.append(menu_sep)
         item_quit = Gtk.MenuItem('Quit')
@@ -56,7 +62,15 @@ class Indicator():
         menu.show_all()
         return menu
 
-    def playPause(self, something):
+    def prev(self, null):
+        command = "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
+        os.system(command)
+
+    def next(self, null):
+        command = "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
+        os.system(command)
+
+    def playPause(self, null):
         command = "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"
         os.system(command)
 
